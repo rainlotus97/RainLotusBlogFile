@@ -102,5 +102,5 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:rainlotus97/RainLotusBlogFile.git
+  repo: git@github.com:rainlotus97/rainlotus97.github.io.git
   branch: master
