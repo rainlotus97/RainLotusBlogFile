@@ -36,13 +36,13 @@ tags:
 
 1.将**scripts**下的**start**的"ng s -o" 改成 "ng s -o --port 80" (指定端口号是为了避免端口号占用，80端口号的好处，在网页上显示时会省略端口，仅个人喜好。其他端口号亦可，注意避免端口相同即可)
 
-![](NG-ALAIN/指定端口号.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E5%8F%B7-5205a6.png)
 
 2.配置请求的URL环境
 
 在src/environments/environment.ts下修改如下，其中**SERVER_URL**为向后端请求的地址，**url**为本地项目启动地址，记得带上端口号。
 
-![](NG-ALAIN/environment.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/environment-8c092d.png)
 
 3.创建服务文件
 
@@ -77,7 +77,7 @@ export class ServicesModule {
 
 (1).我的登录接口的返回例子如下，接下来有用的就是roleCode、token以及permission这三个属性。
 
-![](NG-ALAIN/login.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/login-b26a55.png)
 
 (2).个人原因密码没有做加密操作(懒!)，有兴趣的请自行处理。
 
@@ -320,7 +320,7 @@ logout(): void {
 
 ### 4）实际登录效果图
 
-![](NG-ALAIN/login.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/login-c9d6a9.gif)
 
 ## 3.权限控制
 
@@ -452,7 +452,7 @@ ngOnInit(): void {
 
 页面效果图如下：
 
-![](NG-ALAIN/粒度控制.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E7%B2%92%E5%BA%A6%E6%8E%A7%E5%88%B6-96fcfd.gif)
 
 ### 3）路由守卫
 
@@ -481,7 +481,7 @@ import { ACLGuard } from '@delon/acl';
 
 页面效果图如下：
 
-![](NG-ALAIN/路由守卫.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB-39f223.gif)
 
 ## 4.路由拦截
 
@@ -700,7 +700,7 @@ export class Example02Component implements OnInit {
 
 ##### 3.4）效果演示
 
-![](NG-ALAIN/路由拦截.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E8%B7%AF%E7%94%B1%E6%8B%A6%E6%88%AA-b0f3e4.gif)
 
 # 三、国际化
 
@@ -1160,4 +1160,4 @@ console.log(currentLang);
 
 ### 4）效果演示
 
-![](NG-ALAIN/国际化.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E5%9B%BD%E9%99%85%E5%8C%96-3a4fbd.gif)

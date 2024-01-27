@@ -283,7 +283,7 @@ valueLength = 0;            // 当前输入的密码长度
 
 ### 2.4 实际演示效果
 
-![](实用js函数/密码强度.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E5%AF%86%E7%A0%81%E5%BC%BA%E5%BA%A6-9e3486.gif)
 
 # 二、保留小数点后两位（强制）
 
@@ -391,7 +391,7 @@ getTypeInfo(number, numDelFlag) {
 
 **实例图演示:**
 
-![](实用js函数/逢千进位.gif)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E9%80%A2%E5%8D%83%E8%BF%9B%E4%BD%8D-73d495.gif)
 
 
 

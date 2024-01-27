@@ -51,13 +51,13 @@ Umi 可能不适合你。
 
 ### 1.2.1 技术收敛
 
-![1601014995473](https://i.loli.net/2020/11/03/B7RONxakU4Zny2L.png)
+![1601014995473](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/B7RONxakU4Zny2L-df85fa.png)
 
 这张图是给内部框架 Bigfish 画的，套到 Umi 上同样合适。他把大家常用的技术栈进行整理，收敛到一起，让大家只用 Umi 就可以完成 80% 的日常工作。
 
 ### 1.2.2 插件和插件集
 
-![1601015019180](https://i.loli.net/2020/11/03/AsTaIDd92cBoxMw.png)
+![1601015019180](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/AsTaIDd92cBoxMw-f93dca.png)
 
 Umi 支持插件和插件集，通过这张图应该很好理解到他们的关系，通过插件集我们把插件收敛依赖然后支持不同的业务类型。
 

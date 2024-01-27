@@ -40,7 +40,7 @@ cd my-project
 yarn dev
 ```
 
-![](NextJs/1603177898229.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603177898229-1de9c1.png)
 
 ### 2.2 添加antd
 
@@ -392,7 +392,7 @@ export default IndexPage
 
 ### 3.5 动态路由
 
-![](NextJs/1603180292853.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603180292853-5f184f.png)
 
 通过localhost:3000/users/zs   即可访问[id].tsx
 
@@ -595,7 +595,7 @@ import lessobj from "./styles.less"
 
 <https://fontawesome.dashgame.com/>
 
-![](NextJs/1583649395753.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1583649395753-3178c1.png)
 
 安装next-fonts和next-images
 

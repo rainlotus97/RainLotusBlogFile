@@ -11,7 +11,7 @@ tags:
 
 ## 1.Angular 介绍
 
-![](Angular/angular.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/angular-3478c5.png)
 
 ### 1.1 Angular是什么
 
@@ -43,9 +43,9 @@ Angular（读音['æŋgjʊlə]）是一套用于构建用户界面的 JavaScript
 
 2009年，Misko hevery 和 Adam abrons 在业余时间打造了 `GetAngular`
 
-![](Angular/MiskoInterview.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/MiskoInterview-00f825.png)
 
-![](Angular/4529.jpg)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/4529-4deb85.jpg)
 
 
 
@@ -53,7 +53,7 @@ Misko Hevery 接手了 Google 内部的一个项目 `Feedback` ，该项目经�
 
 结果就是小伙子成功了，使用 `GetAngular` 之后该项目从17000行缩减到了1500行，前后仅仅使用了三周时间。
 
-![](Angular/17000-1500.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/17000-1500-ada574.png)
 
 Misko 领导一看，小伙子厉害啊，同时也看到了 `GetAngular` 所带来的商业价值，所以决定把  `GetAngular` 正式立项，组织专职团队开发和维护。
 
@@ -61,7 +61,7 @@ Abrons 后来离开了这个计划，但在 Google 工作的 Hevery 和一些谷
 
 由于已不再是个人项目，所以开发团队将 `GetAngular` 重新命名为了 `AngularJS` 。
 
-![](Angular/AngularJS-large.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/AngularJS-large-6c5b64.png)
 
 至此，AngularJS 就进入了漫长的发展迭代阶段。
 
@@ -95,19 +95,19 @@ Angular 1.x 由于问题太多，历史包袱太重，重构几乎不可能。
 
 由于 ng2 几乎完全重写了 ng1 ，所以官方把2之后的版本都称之为 Angular。
 
-![](Angular/Angular-large.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/Angular-large-0fe0d5.png)
 
 Angular 2 之后的正式 Logo：
 
-![](Angular/angular.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/angular-02037d.png)
 
 新版本发布了，那用户如何从 1 升级到 2 呢？
 
-![](Angular/ng2-ng1.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/ng2-ng1-260e8d.png)
 
 那到底要不要更新呢？
 
-![](Angular/mountain.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/mountain-7dd750.png)
 
 #### 1.3.4 ng2 相比 ng1
 
@@ -164,11 +164,11 @@ Angular 2 之后的正式 Logo：
    ng serve --port 4201
 ```
 
-![](Angular/1563331466612.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1563331466612-fefc7e.png)
 
 ### 2.2 Angular-cli项目目录结构
 
-![](Angular/1563333171751.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1563333171751-cd66a0.png)
 
 ```
 .
@@ -889,7 +889,7 @@ export class LoginComponent implements OnInit {
 
 ### 3.4 Services（服务）
 
-![](Angular/service.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/service-495b35.png)
 
 服务是一个广义范畴，包括：值、函数或应用所需的功能。
 
@@ -912,7 +912,7 @@ Angular 不会*强制要求*我们遵循这些原则。 即使我们花 3000 行
 
 ### 3.5 依赖注入（Dependency injection）
 
-![](Angular/dependency-injection.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/dependency-injection-ed5e5a.png)
 
 “依赖注入”是提供类的新实例的一种方式，还负责处理好类所需的全部依赖。大多数依赖都是服务。 Angular 使用依赖注入来提供新组件以及组件所需的服务。
 
@@ -1069,13 +1069,13 @@ npm install todomvc-app-css
 
 看到如下页面说明成功。
 
-![](Angular/1563418624733.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1563418624733-44a72f.png)
 
 
 
 ### 4.2 列表数据渲染
 
-![](Angular/1581060581989.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581060581989-2b79aa.png)
 
 ```javascript
 #1.app.components.ts
@@ -1196,7 +1196,7 @@ export class AppComponent {
 
 ### 4.4 切换所有任务项
 
-![](Angular/1581061830879.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581061830879-efbe0b.png)
 
 思路：切换input控件的checked属性值由任务列表中的任务状态决定，当任务列表中的所有任务都完成，input空间的checked状态为选中状态；反之为没有选中状态
 
@@ -1233,7 +1233,7 @@ export class AppComponent {
 
 ### 4.5 删除任务
 
-![](Angular/1581062150742.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581062150742-6c6529.png)
 
 ```javascript
  #1.app.component.html
@@ -1259,7 +1259,7 @@ removeTodo (index: number): void {
 
 #### 4.6.1 双击label启用编辑样式
 
-![](Angular/1581062662377.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581062662377-334cf0.png)
 
 ```javascript
   #1.app.component.html
@@ -1425,7 +1425,7 @@ removeTodo (index: number): void {
 - nativeApp：使用 iOS、Android 官方提供的工具、开发平台、配套语言进行手机App开发的方式；
 - hybrid：使用前端已有的技术，HTML + CSS + JS ，然后再搭配一些相关的打包编译技术，就能够开发出一个手机App，安装到手机中进行使用。
 
-![](Angular/1581237370446.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581237370446-b57dd4.png)
 
 ### 5.2 混合式开发的技术选型
 
@@ -1506,7 +1506,7 @@ removeTodo (index: number): void {
 
 ### 5.3 开发技术选型的区别
 
-![](Angular/aa.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/aa-d899c9.png)
 
 ## 6.Ionic
 
@@ -1534,7 +1534,7 @@ https://www.jianshu.com/p/1fec065bb359
 
 **精美的设计**：干净，简单，功能齐全。
 
-![](Angular/1581127808417.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1581127808417-0e4003.png)
 
 **Ionic CLI**：是一种快速支撑Ionic应用程序并为Ionic开发人员提供许多有用命令的工具
 

@@ -49,9 +49,9 @@ $ npx create-nuxt-app@3.4.0 nuxt-learn
    访问  http://localhost:3000/
 ```
 
-![](Nuxt/1603173951023.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603173951023-091a39.png)
 
-![](Nuxt/1603174416233.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603174416233-cabf75.png)
 
 ### 1.3 Nuxt基本使用
 
@@ -352,7 +352,7 @@ module.exports = app
 
 #### 1.5.3 Nuxt.js工作流
 
-![](Nuxt/1546049173524.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1546049173524-ab73b9.png)
 
 > nuxtServerInit：如果在状态树(store)中指定了 `nuxtServerInit` 方法，Nuxt.js 调用它的时候会将页面的上下文对象作为第2个参数传给它（仅在服务端调用）。当我们想将服务端的一些数据传到客户端时，这个方法是非常好用的  
 >
@@ -466,7 +466,7 @@ async asyncData(context){
 
 ### 1.6 SSR原理
 
-![img](http://5b0988e595225.cdn.sohucs.com/images/20180524/92672015b4914784ae5a800c4a655e25.jpeg)
+![img](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/92672015b4914784ae5a800c4a655e25-775b4c.jpeg)
 
 **官方文档**:https://ssr.vuejs.org/zh/
 
@@ -479,5 +479,4 @@ async asyncData(context){
 > 1.拿到数据，使用	virtual-dom进行预渲染，然后和服务端渲染出来的进行比对，比对两边渲染的内容是不是一致的
 >
 > 2.对DOM元素的事件进行绑定，也就是回答的问题，事件在这块进行的处理
-
 

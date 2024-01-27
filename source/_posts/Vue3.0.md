@@ -25,7 +25,7 @@ vue-cli是vue官网提供的一个脚手架，这个构建工具大大降低了w
     选择vue2x
 ```
 
-![](Vue3.0/1548217691062.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1548217691062-6e6242.png)
 
 
 
@@ -43,15 +43,15 @@ npm run serve
 npm run build
 ```
 
-![](Vue3.0/1548290537572.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1548290537572-18b001.png)
 
 ## 1.2 windows(32位) npm装不上vue/cli的问题
 
-![](Vue3.0/1562661036910.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1562661036910-a859ca.png)
 
-![](Vue3.0/1562661053769.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1562661053769-d205f2.png)
 
-![](Vue3.0/1562661089819.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1562661089819-659c7b.png)
 
 
 
@@ -268,13 +268,13 @@ vue create 项目名称
 //选择vue3.x
 ```
 
-![](Vue3.0/1603679141042.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603679141042-ab66ca.png)
 
-![](Vue3.0/1603679160411.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603679160411-d22e5f.png)
 
-![](Vue3.0/1603679497767.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603679497767-3eed9b.png)
 
-![](Vue3.0/1603679546832.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603679546832-ffc393.png)
 
 ## 2.2  Vue composition API (函数式api)
 
@@ -585,7 +585,7 @@ setup(props,context) {
 
 #### c) provide和inject
 
-![](Vue3.0/1603696657842.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603696657842-8d612a.png)
 
 ```javascript
 //父组件
@@ -669,7 +669,7 @@ export default defineComponent({
 
 ### 2.2.10 vue3.0生命周期钩子
 
-![](Vue3.0/1603697386395.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/1603697386395-197c45.png)
 
 ```javascript
 onMounted(()=>{

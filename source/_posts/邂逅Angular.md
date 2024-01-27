@@ -19,7 +19,7 @@ Angular基于TypeScript和react、vue相比 Angular更适合中大型企业级�
 
 目前2019年12月25日**angular**最新版本angular9.x。根据官方介绍，Angular每过几个月就会更新一个版本。Angular2.x以后所有的Angular版本用法都是一样的，此教程同样适用于Angular7.x 、Angular8.x、Angular9.x 以及未来的其它版本....
 
-![](邂逅Angular/angular关系图.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/angular%E5%85%B3%E7%B3%BB%E5%9B%BE-e91ce6.png)
 
 
 
@@ -79,7 +79,7 @@ npm install -g @angular/cli     或者    cnpm install -g @angular/cli
    ng new angulardemo --skip-install
    ```
 
-   ![](邂逅Angular/angular安装.png)
+   ![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/angular%E5%AE%89%E8%A3%85-11ec84.png)
 
 3. **运行项目**
 
@@ -135,7 +135,7 @@ npm install -g @angular/cli     或者    cnpm install -g @angular/cli
 
 ## 1、目录结构分析
 
-![](邂逅Angular/angular目录结构.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/angular%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-e2fc74.png)
 
 ## 2、app.module.ts、组件分析 
 
@@ -143,7 +143,7 @@ npm install -g @angular/cli     或者    cnpm install -g @angular/cli
 
 定义 AppModule，这个根模块会告诉 Angular 如何组装该应用。 目前，它只声明了 AppComponent。 稍后它还会声明更多组件。 
 
-![](邂逅Angular/app.module.ts.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/app.module.ts-38a765.png)
 
 ### 2.2 自定义组件
 
@@ -157,7 +157,7 @@ npm install -g @angular/cli     或者    cnpm install -g @angular/cli
 
   ```js
   import { Component, OnInit } from '@angular/core'; /*引入 angular 核心*/
-
+  
   @Component({ 
   	selector: 'app-header', /*使用这个组件的名称*/ 
   	templateUrl: './header.component.html', /*html 模板*/ 
@@ -195,7 +195,7 @@ msg:string='你好angularjs4.0'
 <div [id]="id" [title]="msg">调试工具看看我的属性</div>
 ```
 
-![](邂逅Angular/绑定属性.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7-cbe98e.png)
 
 ## 3、数据循环 *ngFor
 
@@ -327,7 +327,7 @@ public today=new Date();
 
 ### 1.1 组件与服务关系图
 
-![](邂逅Angular/组件与服务.png)
+![](https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2024-01-27/%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%9C%8D%E5%8A%A1-b3ac1f.png)
 
 ### 1.2 创建服务命令
 
@@ -364,7 +364,7 @@ ng g service services/storage
      providers: [StorageService],
      bootstrap: [AppComponent]
    })
-
+   
    export class AppModule { }
    ```
 
