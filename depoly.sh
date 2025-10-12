@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 智能部署脚本：避免无意义部署 + 智能提交信息
+# 修复版智能部署脚本：先检查后执行
 
 set -e
 
@@ -10,11 +10,16 @@ log_success() { echo "✅ $1"; }
 log_warning() { echo "⚠️  $1"; }
 log_error() { echo "❌ $1"; }
 
-# 检查是否有实际的内容更新
-has_meaningful_changes() {
+# 检查是否需要 Hexo 部署（基于当前未提交的变更）
+check_if_deployment_needed() {
     local git_status=$(git status --porcelain)
     
-    # 排除不需要触发部署的文件类型
+    # 如果没有变更，不需要部署
+    if [[ -z "$git_status" ]]; then
+        return 1
+    fi
+    
+    # 检查是否有需要部署的文件类型
     while IFS= read -r line; do
         if [[ -z "$line" ]]; then
             continue
@@ -23,15 +28,13 @@ has_meaningful_changes() {
         local status=${line:0:2}
         local filename=${line:3}
         
-        # 检查文件类型 - 只有这些类型的文件变更才需要重新部署
+        # 这些文件类型的变更需要重新部署
         case "$filename" in
-            # 内容相关文件
             source/_posts/*.md|source/_posts/*.markdown) return 0 ;;
-            # 配置相关文件
-            _config.yml|_config.*.yml|themes/*) return 0 ;;
-            # 布局和模板文件
-            scaffolds/*|source/_data/*|source/_drafts/*) return 0 ;;
-            # 脚本文件（可能影响生成）
+            _config.yml|_config.*.yml) return 0 ;;
+            themes/*) return 0 ;;
+            scaffolds/*) return 0 ;;
+            source/_drafts/*) return 0 ;;
             *.js|*.ts) return 0 ;;
         esac
     done <<< "$git_status"
@@ -219,64 +222,63 @@ main() {
         exit 0
     fi
     
-    # 检查是否有需要部署的实质性变更
-    if ! has_meaningful_changes; then
-        log_warning "检测到更改，但无需重新部署 Hexo"
-        log_info "仅提交 Git 变更..."
-        
-        # 生成智能提交信息
-        local commit_message=$(generate_smart_commit_message)
-        log_success "提交信息: $commit_message"
-        
-        # 提交所有更改
-        git add -A
-        git commit -m "$commit_message"
-        git push origin $(git branch --show-current)
-        
-        log_success "Git 提交完成！跳过 Hexo 部署。"
-        exit 0
-    fi
-    
-    # 有实质性变更，执行完整部署流程
-    log_info "检测到需要部署的变更，开始完整部署流程..."
-    
-    # 1. 执行 Hexo 清理和部署
-    log_info "清理 Hexo 缓存..."
-    hexo clean
-    
-    log_info "生成并部署 Hexo 博客..."
-    if hexo g -d; then
-        log_success "Hexo 部署完成！"
+    # 1. 首先检查是否需要 Hexo 部署（基于当前未提交的变更）
+    local needs_deployment=false
+    if check_if_deployment_needed; then
+        needs_deployment=true
+        log_info "检测到需要部署的变更，开始完整部署流程..."
     else
-        log_error "Hexo 部署失败！"
-        exit 1
+        log_warning "检测到更改，但无需重新部署 Hexo"
     fi
     
-    # 2. 生成智能提交信息
+    # 2. 生成智能提交信息（基于当前未提交的变更）
     log_info "生成智能提交信息..."
     local commit_message=$(generate_smart_commit_message)
     log_success "提交信息: $commit_message"
     
-    # 3. 提交所有更改
+    # 3. 如果有需要部署的变更，先执行 Hexo 部署
+    if [ "$needs_deployment" = true ]; then
+        log_info "清理 Hexo 缓存..."
+        hexo clean
+        
+        log_info "生成并部署 Hexo 博客..."
+        if hexo g -d; then
+            log_success "Hexo 部署完成！"
+        else
+            log_error "Hexo 部署失败！"
+            exit 1
+        fi
+    fi
+    
+    # 4. 提交所有更改（包括 Hexo 部署生成的文件）
     log_info "添加所有更改到暂存区..."
     git add -A
     
-    log_info "提交更改..."
-    if git commit -m "$commit_message"; then
-        log_success "本地提交完成！"
+    # 检查提交前是否还有变更（部署可能产生了新文件）
+    if [[ -z $(git status --porcelain) ]]; then
+        log_warning "添加后没有检测到变更，跳过提交"
     else
-        log_error "Git 提交失败！"
-        exit 1
+        log_info "提交更改..."
+        if git commit -m "$commit_message"; then
+            log_success "本地提交完成！"
+        else
+            log_error "Git 提交失败！"
+            exit 1
+        fi
     fi
     
-    # 4. 推送到远程仓库
+    # 5. 推送到远程仓库
     log_info "获取当前分支名..."
     local current_branch=$(git branch --show-current)
     
     log_info "推送到远程仓库 (分支: $current_branch)..."
     if git push origin "$current_branch"; then
-        log_success "智能部署完成！"
-        log_success "Hexo 已部署 + Git 已提交并推送"
+        if [ "$needs_deployment" = true ]; then
+            log_success "智能部署完成！"
+            log_success "Hexo 已部署 + Git 已提交并推送"
+        else
+            log_success "Git 提交完成！跳过 Hexo 部署。"
+        fi
     else
         log_error "Git 推送失败！"
         exit 1
