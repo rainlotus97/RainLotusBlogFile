@@ -1,7 +1,9 @@
 ---
 title: C#基础语言开发
 date: 2025-10-12 21:53:03
-tags: C#
+tags: 
+  - C#
+  - Godot
 categories: Godot
 cover: https://cdn.jsdelivr.net/gh/rainlotus97/images/data/2025-10-12/Snipaste_2025-10-12_21-56-23-397b7d.png
 description: 记录自学C#语言的过程
