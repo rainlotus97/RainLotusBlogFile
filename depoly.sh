@@ -1,20 +1,48 @@
 #!/bin/bash
 
-# 简洁智能提交信息生成脚本
+# 智能部署脚本：避免无意义部署 + 智能提交信息
 
 set -e
 
-# 日志函数（无颜色）
+# 日志函数
 log_info() { echo "ℹ️  $1"; }
 log_success() { echo "✅ $1"; }
 log_warning() { echo "⚠️  $1"; }
 log_error() { echo "❌ $1"; }
 
+# 检查是否有实际的内容更新
+has_meaningful_changes() {
+    local git_status=$(git status --porcelain)
+    
+    # 排除不需要触发部署的文件类型
+    while IFS= read -r line; do
+        if [[ -z "$line" ]]; then
+            continue
+        fi
+        
+        local status=${line:0:2}
+        local filename=${line:3}
+        
+        # 检查文件类型 - 只有这些类型的文件变更才需要重新部署
+        case "$filename" in
+            # 内容相关文件
+            source/_posts/*.md|source/_posts/*.markdown) return 0 ;;
+            # 配置相关文件
+            _config.yml|_config.*.yml|themes/*) return 0 ;;
+            # 布局和模板文件
+            scaffolds/*|source/_data/*|source/_drafts/*) return 0 ;;
+            # 脚本文件（可能影响生成）
+            *.js|*.ts) return 0 ;;
+        esac
+    done <<< "$git_status"
+    
+    # 如果没有找到需要部署的文件变更
+    return 1
+}
+
 # 分析 Git 变更并生成智能提交信息
 generate_smart_commit_message() {
     local timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-    
-    # 获取 Git 状态详情
     local git_status=$(git status --porcelain)
     
     # 初始化文件类型计数器
@@ -190,6 +218,27 @@ main() {
         log_warning "没有检测到 Git 更改"
         exit 0
     fi
+    
+    # 检查是否有需要部署的实质性变更
+    if ! has_meaningful_changes; then
+        log_warning "检测到更改，但无需重新部署 Hexo"
+        log_info "仅提交 Git 变更..."
+        
+        # 生成智能提交信息
+        local commit_message=$(generate_smart_commit_message)
+        log_success "提交信息: $commit_message"
+        
+        # 提交所有更改
+        git add -A
+        git commit -m "$commit_message"
+        git push origin $(git branch --show-current)
+        
+        log_success "Git 提交完成！跳过 Hexo 部署。"
+        exit 0
+    fi
+    
+    # 有实质性变更，执行完整部署流程
+    log_info "检测到需要部署的变更，开始完整部署流程..."
     
     # 1. 执行 Hexo 清理和部署
     log_info "清理 Hexo 缓存..."
