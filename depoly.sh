@@ -1,25 +1,14 @@
 #!/bin/bash
 
-# 智能提交信息生成脚本 - 根据文件类型生成相应的提交信息
+# 简洁智能提交信息生成脚本
 
 set -e
 
-# 颜色定义
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-NC='\033[0m'
-
-# 日志函数
-log_info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
-log_success() { echo -e "${GREEN}✅ $1${NC}"; }
-log_warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
-log_error() { echo -e "${RED}❌ $1${NC}"; }
-log_debug() { echo -e "${PURPLE}🐛 $1${NC}"; }
-log_type() { echo -e "${CYAN}📁 $1${NC}"; }
+# 日志函数（无颜色）
+log_info() { echo "ℹ️  $1"; }
+log_success() { echo "✅ $1"; }
+log_warning() { echo "⚠️  $1"; }
+log_error() { echo "❌ $1"; }
 
 # 分析 Git 变更并生成智能提交信息
 generate_smart_commit_message() {
@@ -59,46 +48,25 @@ generate_smart_commit_message() {
         
         # 统计文件类型
         case "$filename" in
-            *.sh|*.bash)
-                ((shell_files++))
-                log_type "Shell 脚本: $filename ($status)"
-                ;;
-            *.md|*.markdown)
-                ((markdown_files++))
-                log_type "Markdown 文档: $filename ($status)"
-                ;;
-            *.json|*.yml|*.yaml|*.config|*.xml|*.toml)
-                ((config_files++))
-                log_type "配置文件: $filename ($status)"
-                ;;
-            *.png|*.jpg|*.jpeg|*.gif|*.svg|*.ico)
-                ((image_files++))
-                log_type "图片资源: $filename ($status)"
-                ;;
-            *.css|*.scss|*.less|*.styl)
-                ((style_files++))
-                log_type "样式文件: $filename ($status)"
-                ;;
-            *)
-                ((other_files++))
-                log_type "其他文件: $filename ($status)"
-                ;;
+            *.sh|*.bash) ((shell_files++)) ;;
+            *.md|*.markdown) ((markdown_files++)) ;;
+            *.json|*.yml|*.yaml|*.config|*.xml|*.toml) ((config_files++)) ;;
+            *.png|*.jpg|*.jpeg|*.gif|*.svg|*.ico) ((image_files++)) ;;
+            *.css|*.scss|*.less|*.styl) ((style_files++)) ;;
+            *) ((other_files++)) ;;
         esac
     done <<< "$git_status"
-    
-    log_debug "文件类型统计: Shell($shell_files) MD($markdown_files) 配置($config_files) 图片($image_files) 样式($style_files) 其他($other_files)"
-    log_debug "操作类型统计: 新增($added_files) 修改($modified_files) 删除($deleted_files)"
     
     # 生成操作描述
     local operation_desc=""
     if [ $added_files -gt 0 ] && [ $modified_files -eq 0 ] && [ $deleted_files -eq 0 ]; then
-        operation_desc="新增"
+        operation_desc="发布"
     elif [ $deleted_files -gt 0 ] && [ $added_files -eq 0 ] && [ $modified_files -eq 0 ]; then
-        operation_desc="删除"
+        operation_desc="移除"
     elif [ $modified_files -gt 0 ] && [ $added_files -eq 0 ] && [ $deleted_files -eq 0 ]; then
-        operation_desc="更新"
+        operation_desc="优化"
     else
-        operation_desc="变更"
+        operation_desc="更新"
     fi
     
     # 生成文件类型描述
@@ -106,61 +74,109 @@ generate_smart_commit_message() {
     local type_count=0
     
     if [ $shell_files -gt 0 ]; then
-        type_desc="${type_desc}脚本"
+        type_desc="脚本"
         ((type_count++))
     fi
     
     if [ $markdown_files -gt 0 ]; then
         if [ $type_count -gt 0 ]; then
-            type_desc="${type_desc}、"
+            type_desc="${type_desc}与文章"
+        else
+            type_desc="文章"
         fi
-        type_desc="${type_desc}文章"
         ((type_count++))
     fi
     
     if [ $config_files -gt 0 ]; then
         if [ $type_count -gt 0 ]; then
-            type_desc="${type_desc}、"
+            type_desc="${type_desc}与配置"
+        else
+            type_desc="配置"
         fi
-        type_desc="${type_desc}配置"
         ((type_count++))
     fi
     
     if [ $image_files -gt 0 ]; then
         if [ $type_count -gt 0 ]; then
-            type_desc="${type_desc}、"
+            type_desc="${type_desc}与图片"
+        else
+            type_desc="图片"
         fi
-        type_desc="${type_desc}图片"
         ((type_count++))
     fi
     
     if [ $style_files -gt 0 ]; then
         if [ $type_count -gt 0 ]; then
-            type_desc="${type_desc}、"
+            type_desc="${type_desc}与样式"
+        else
+            type_desc="样式"
         fi
-        type_desc="${type_desc}样式"
         ((type_count++))
     fi
     
     if [ $other_files -gt 0 ] && [ $type_count -eq 0 ]; then
         type_desc="资源"
-    elif [ $other_files -gt 0 ]; then
+    elif [ $other_files -gt 0 ] && [ $type_count -gt 0 ]; then
         type_desc="${type_desc}等"
     fi
     
-    # 生成最终提交信息
-    if [ -z "$type_desc" ]; then
-        echo "$operation_desc博客内容 - $timestamp"
+    # 根据不同类型的组合生成精炼的提交信息
+    local commit_message=""
+    
+    if [ $type_count -eq 0 ]; then
+        # 没有特定类型，使用通用描述
+        local generic_msgs=(
+            "博客维护 | 持续改进"
+            "内容更新 | 优化体验"
+            "资源同步 | 保持最新"
+            "项目整理 | 代码优化"
+        )
+        local random_index=$((RANDOM % ${#generic_msgs[@]}))
+        commit_message="${generic_msgs[$random_index]} - $timestamp"
+        
     elif [ $type_count -eq 1 ]; then
-        echo "$operation_desc${type_desc} - $timestamp"
+        # 单一文件类型
+        case "$type_desc" in
+            "脚本")
+                local msgs=("优化脚本功能 | 提升效率" "完善工具链 | 自动化流程" "脚本维护 | 功能增强")
+                ;;
+            "文章")
+                local msgs=("发布新文章 | 知识分享" "更新博客内容 | 思想记录" "文章优化 | 阅读体验")
+                ;;
+            "配置")
+                local msgs=("调整配置项 | 系统优化" "更新设置 | 性能调优" "配置维护 | 环境完善")
+                ;;
+            "图片")
+                local msgs=("添加图片资源 | 视觉优化" "更新媒体内容 | 丰富展示" "图片资源 | 内容增强")
+                ;;
+            "样式")
+                local msgs=("美化界面样式 | 视觉升级" "优化视觉效果 | 用户体验" "样式调整 | 界面优化")
+                ;;
+            *)
+                local msgs=("内容更新 | 持续改进" "资源维护 | 项目优化")
+                ;;
+        esac
+        local random_index=$((RANDOM % ${#msgs[@]}))
+        commit_message="${msgs[$random_index]} - $timestamp"
+        
     else
-        echo "$operation_desc${type_desc} - $timestamp"
+        # 多种文件类型
+        local multi_msgs=(
+            "综合更新 | 多维度优化"
+            "多项改进 | 全面提升"
+            "内容与功能 | 同步升级"
+            "多资源更新 | 系统维护"
+        )
+        local random_index=$((RANDOM % ${#multi_msgs[@]}))
+        commit_message="${multi_msgs[$random_index]} - $timestamp"
     fi
+    
+    echo "$commit_message"
 }
 
 # 主函数
 main() {
-    log_info "🚀 开始智能部署流程..."
+    log_info "开始智能部署流程..."
     
     # 检查是否在 Git 仓库中
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
@@ -169,17 +185,17 @@ main() {
     fi
     
     # 显示当前 Git 状态
-    log_info "📊 分析文件变更..."
+    log_info "分析文件变更..."
     if [[ -z $(git status --porcelain) ]]; then
-        log_warning "📭 没有检测到 Git 更改"
+        log_warning "没有检测到 Git 更改"
         exit 0
     fi
     
     # 1. 执行 Hexo 清理和部署
-    log_info "🧹 清理 Hexo 缓存..."
+    log_info "清理 Hexo 缓存..."
     hexo clean
     
-    log_info "📝 生成并部署 Hexo 博客..."
+    log_info "生成并部署 Hexo 博客..."
     if hexo g -d; then
         log_success "Hexo 部署完成！"
     else
@@ -188,15 +204,15 @@ main() {
     fi
     
     # 2. 生成智能提交信息
-    log_info "🤖 生成智能提交信息..."
+    log_info "生成智能提交信息..."
     local commit_message=$(generate_smart_commit_message)
-    log_success "生成的提交信息: $commit_message"
+    log_success "提交信息: $commit_message"
     
     # 3. 提交所有更改
-    log_info "📦 添加所有更改到暂存区..."
+    log_info "添加所有更改到暂存区..."
     git add -A
     
-    log_info "💾 提交更改..."
+    log_info "提交更改..."
     if git commit -m "$commit_message"; then
         log_success "本地提交完成！"
     else
@@ -205,13 +221,13 @@ main() {
     fi
     
     # 4. 推送到远程仓库
-    log_info "🔄 获取当前分支名..."
+    log_info "获取当前分支名..."
     local current_branch=$(git branch --show-current)
     
-    log_info "📤 推送到远程仓库 (分支: $current_branch)..."
+    log_info "推送到远程仓库 (分支: $current_branch)..."
     if git push origin "$current_branch"; then
-        log_success "🎉 智能部署完成！"
-        log_success "📊 Hexo 已部署 + Git 已提交并推送"
+        log_success "智能部署完成！"
+        log_success "Hexo 已部署 + Git 已提交并推送"
     else
         log_error "Git 推送失败！"
         exit 1
